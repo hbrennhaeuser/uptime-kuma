@@ -200,6 +200,12 @@ class Monitor extends BeanModel {
             snmpVersion: this.snmpVersion,
             smtpSecurity: this.smtpSecurity,
             rabbitmqNodes: JSON.parse(this.rabbitmqNodes),
+            icinga2Url: this.icinga2Url,
+            icinga2IgnoreTls: this.getIcinga2IgnoreTls(),
+            icinga2HostFilter: this.icinga2HostFilter,
+            icinga2ServiceFilter: this.icinga2ServiceFilter,
+            icinga2IgnoreWarning: this.getIcinga2IgnoreWarning(),
+            icinga2IgnoreUnknown: this.getIcinga2IgnoreUnknown(),
             conditions: JSON.parse(this.conditions),
             ipFamily: this.ipFamily,
             expectedTlsAlert: this.expected_tls_alert,
@@ -246,6 +252,8 @@ class Monitor extends BeanModel {
                 kafkaProducerSaslOptions: JSON.parse(this.kafkaProducerSaslOptions),
                 rabbitmqUsername: this.rabbitmqUsername,
                 rabbitmqPassword: this.rabbitmqPassword,
+                icinga2Username: this.icinga2Username,
+                icinga2Password: this.icinga2Password,
             };
         }
 
@@ -399,6 +407,30 @@ class Monitor extends BeanModel {
      */
     getSaveErrorResponse() {
         return Boolean(this.save_error_response);
+    }
+
+    /**
+     * Parse to boolean
+     * @returns {boolean} Icinga2 Ignore TLS?
+     */
+    getIcinga2IgnoreTls() {
+        return Boolean(this.icinga2IgnoreTls);
+    }
+
+    /**
+     * Parse to boolean
+     * @returns {boolean} Icinga2 Ignore Warning?
+     */
+    getIcinga2IgnoreWarning() {
+        return Boolean(this.icinga2IgnoreWarning);
+    }
+
+    /**
+     * Parse to boolean
+     * @returns {boolean} Icinga2 Ignore Unknown?
+     */
+    getIcinga2IgnoreUnknown() {
+        return Boolean(this.icinga2IgnoreUnknown);
     }
 
     /**

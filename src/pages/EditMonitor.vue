@@ -83,6 +83,7 @@
                                         <option value="gamedig">GameDig</option>
                                         <option value="mqtt">MQTT</option>
                                         <option value="rabbitmq">RabbitMQ</option>
+                                        <option value="icinga2">Icinga2</option>
                                         <option value="kafka-producer">Kafka Producer</option>
                                         <option value="sqlserver">Microsoft SQL Server</option>
                                         <option value="postgres">PostgreSQL</option>
@@ -114,6 +115,12 @@
                                         </a>
                                     </template>
                                 </i18n-t>
+                                <div
+                                    v-if="monitor.type === 'icinga2'"
+                                    class="form-text"
+                                >
+                                    {{ $t("icinga2HelpText") }}
+                                </div>
                             </div>
 
                             <div v-if="monitor.type === 'tailscale-ping'" class="alert alert-warning" role="alert">
@@ -439,6 +446,101 @@
                                         autocomplete="false"
                                         required="true"
                                     ></HiddenInput>
+                                </div>
+                            </template>
+
+                            <template v-if="monitor.type === 'icinga2'">
+                                <div class="my-3">
+                                    <label for="icinga2Url" class="form-label">{{ $t("icinga2Url") }}</label>
+                                    <input
+                                        id="icinga2Url"
+                                        v-model="monitor.icinga2Url"
+                                        type="text"
+                                        required
+                                        class="form-control"
+                                        placeholder="icinga2.example.com:5665"
+                                    />
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="icinga2Username" class="form-label">{{ $t("icinga2Username") }}</label>
+                                    <input
+                                        id="icinga2Username"
+                                        v-model="monitor.icinga2Username"
+                                        type="text"
+                                        required
+                                        class="form-control"
+                                    />
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="icinga2Password" class="form-label">{{ $t("icinga2Password") }}</label>
+                                    <HiddenInput
+                                        id="icinga2Password"
+                                        v-model="monitor.icinga2Password"
+                                        autocomplete="false"
+                                        required="true"
+                                    />
+                                </div>
+
+                                <div class="my-3 form-check">
+                                    <input
+                                        id="icinga2IgnoreTls"
+                                        v-model="monitor.icinga2IgnoreTls"
+                                        type="checkbox"
+                                        class="form-check-input"
+                                    />
+                                    <label for="icinga2IgnoreTls" class="form-check-label">
+                                        {{ $t("icinga2IgnoreTls") }}
+                                    </label>
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="icinga2HostFilter" class="form-label">{{ $t("icinga2HostFilter") }}</label>
+                                    <input
+                                        id="icinga2HostFilter"
+                                        v-model="monitor.icinga2HostFilter"
+                                        type="text"
+                                        class="form-control"
+                                        :placeholder="$t('icinga2HostFilterPlaceholder')"
+                                    />
+                                    <div class="form-text">{{ $t("icinga2FilterDescription") }}</div>
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="icinga2ServiceFilter" class="form-label">{{ $t("icinga2ServiceFilter") }}</label>
+                                    <input
+                                        id="icinga2ServiceFilter"
+                                        v-model="monitor.icinga2ServiceFilter"
+                                        type="text"
+                                        class="form-control"
+                                        :placeholder="$t('icinga2ServiceFilterPlaceholder')"
+                                    />
+                                    <div class="form-text">{{ $t("icinga2FilterDescription") }}</div>
+                                </div>
+
+                                <div class="my-3 form-check">
+                                    <input
+                                        id="icinga2IgnoreWarning"
+                                        v-model="monitor.icinga2IgnoreWarning"
+                                        type="checkbox"
+                                        class="form-check-input"
+                                    />
+                                    <label for="icinga2IgnoreWarning" class="form-check-label">
+                                        {{ $t("icinga2IgnoreWarning") }}
+                                    </label>
+                                </div>
+
+                                <div class="my-3 form-check">
+                                    <input
+                                        id="icinga2IgnoreUnknown"
+                                        v-model="monitor.icinga2IgnoreUnknown"
+                                        type="checkbox"
+                                        class="form-check-input"
+                                    />
+                                    <label for="icinga2IgnoreUnknown" class="form-check-label">
+                                        {{ $t("icinga2IgnoreUnknown") }}
+                                    </label>
                                 </div>
                             </template>
 
@@ -2873,6 +2975,14 @@ const monitorDefaults = {
     rabbitmqNodes: [],
     rabbitmqUsername: "",
     rabbitmqPassword: "",
+    icinga2Url: "",
+    icinga2Username: "",
+    icinga2Password: "",
+    icinga2IgnoreTls: false,
+    icinga2HostFilter: "",
+    icinga2ServiceFilter: "",
+    icinga2IgnoreWarning: false,
+    icinga2IgnoreUnknown: false,
     conditions: [],
     system_service_name: "",
 };
