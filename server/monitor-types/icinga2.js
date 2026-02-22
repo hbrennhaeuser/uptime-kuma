@@ -35,7 +35,7 @@ class Icinga2MonitorType extends MonitorType {
         let servicesTotal = 0;
 
         if (hostFilter) {
-            const hosts = await this.queryObjects(axiosConfig, "hosts", hostFilter, [ "name", "state" ]);
+            const hosts = await this.queryObjects(axiosConfig, "hosts", hostFilter, ["name", "state"]);
             if (hosts.length === 0) {
                 throw new Error("Host filter returned no results — check your filter expression");
             }
@@ -48,7 +48,7 @@ class Icinga2MonitorType extends MonitorType {
         }
 
         if (serviceFilter) {
-            const services = await this.queryObjects(axiosConfig, "services", serviceFilter, [ "name", "state" ]);
+            const services = await this.queryObjects(axiosConfig, "services", serviceFilter, ["name", "state"]);
             if (services.length === 0) {
                 throw new Error("Service filter returned no results — check your filter expression");
             }
@@ -92,7 +92,7 @@ class Icinga2MonitorType extends MonitorType {
             baseURL: baseUrl,
             timeout: monitor.timeout * 1000,
             headers: {
-                "Accept": "application/json",
+                Accept: "application/json",
                 "X-HTTP-Method-Override": "GET",
             },
             auth: {
@@ -142,7 +142,6 @@ class Icinga2MonitorType extends MonitorType {
             throw new Error(error.message);
         }
     }
-
 }
 
 module.exports = {

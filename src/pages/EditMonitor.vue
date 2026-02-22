@@ -115,10 +115,7 @@
                                         </a>
                                     </template>
                                 </i18n-t>
-                                <div
-                                    v-if="monitor.type === 'icinga2'"
-                                    class="form-text"
-                                >
+                                <div v-if="monitor.type === 'icinga2'" class="form-text">
                                     {{ $t("icinga2HelpText") }}
                                 </div>
                             </div>
@@ -496,7 +493,9 @@
                                 </div>
 
                                 <div class="my-3">
-                                    <label for="icinga2HostFilter" class="form-label">{{ $t("icinga2HostFilter") }}</label>
+                                    <label for="icinga2HostFilter" class="form-label">
+                                        {{ $t("icinga2HostFilter") }}
+                                    </label>
                                     <input
                                         id="icinga2HostFilter"
                                         v-model="monitor.icinga2HostFilter"
@@ -508,7 +507,9 @@
                                 </div>
 
                                 <div class="my-3">
-                                    <label for="icinga2ServiceFilter" class="form-label">{{ $t("icinga2ServiceFilter") }}</label>
+                                    <label for="icinga2ServiceFilter" class="form-label">
+                                        {{ $t("icinga2ServiceFilter") }}
+                                    </label>
                                     <input
                                         id="icinga2ServiceFilter"
                                         v-model="monitor.icinga2ServiceFilter"
